@@ -1,0 +1,103 @@
+<html>
+
+<head>
+
+    <title>Cooliotto Portfolio | Rocket Descent</title>
+    <meta name="description" content="Portfolio entry for Max Quagliotto (Cooliotto) showcasing Rocket Descent; a lighthearted Phaser.io 2 prototype game originally built as a playful hidden easter egg for a company website, showcasing gameplay, animation, and WebAudio integration.">
+    <meta name="keywords" content="Phaser" />
+
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" type="image/png" href="/assets/image/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/assets/image/favicon.svg" />
+    <link rel="shortcut icon" href="/assets/image/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/image/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Rocket Descent" />
+    <link rel="manifest" href="/assets/image/site.webmanifest" />
+
+    <link rel="manifest" href="manifest.json">
+    <link href="https://fonts.googleapis.com/css?family=Anton|Crete+Round|Muli:900" rel="stylesheet">
+    <script src="js/engine/phaser.min.js"></script>
+    <script src="js/engine/phaser.checkbox.min.js"></script>
+    <script src="game.min.js"></script>
+
+
+
+
+
+
+
+<style type="text/css">
+        body {
+            background: #eee;
+            padding: 0px;
+            margin: 0px;
+        }
+        
+        .fontPreload {
+            position: absolute;
+            left: -100px;
+        }
+        
+        .font-anton {
+            font-family: 'Anton';
+        }
+        
+        .font-crete {
+            font-family: 'Crete Round';
+        }
+        
+        .font-muli {
+            font-family: 'Muli';
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="fontPreload">
+        <span class="font-anton">.</span>
+        <span class="font-crete">.</span>
+        <span class="font-muli">.</span>
+    </div>
+</body>
+<script type="text/javascript">
+    (function () {
+        var w = window.innerWidth;//* pixelRatio,
+        var h = window.innerHeight;//* pixelRatio;
+        var lw, lh; //landscape width/height in pixels
+        if (h > w) {
+            lw = h;
+            lh = w;
+        } else {
+            lw = w;
+            lh = h;
+        }
+        const SAFE_ZONE_WIDTH = 1280; const SAFE_ZONE_HEIGHT = 720;
+        var aspectRatioDevice = lw / lh;
+
+        var aspectRatioSafeZone = SAFE_ZONE_WIDTH / SAFE_ZONE_HEIGHT;
+        var extraWidth = 0, extraHeight = 0;
+        if (aspectRatioSafeZone < aspectRatioDevice) {
+            // have to add game pixels vertically in order to fill the device screen
+            extraWidth = aspectRatioDevice * SAFE_ZONE_HEIGHT - SAFE_ZONE_WIDTH;
+        } else {
+            // have to add game pixels horizontally
+            extraHeight = SAFE_ZONE_WIDTH / aspectRatioDevice - SAFE_ZONE_HEIGHT;
+        }
+        //var game = new Phaser.Game(1280, 720, Phaser.CANVAS, 'rocket-d');
+        var game = new Phaser.Game(SAFE_ZONE_WIDTH + extraWidth, SAFE_ZONE_HEIGHT + extraHeight, Phaser.CANVAS, 'rocket-d');
+        game.state.add('Boot', RKD.Games.RocketD.Boot);
+        game.state.add('Preloader', RKD.Games.RocketD.Preloader);
+        game.state.add('PreSplash', RKD.Games.RocketD.PreSplash);
+        game.state.add('Splash', RKD.Games.RocketD.Splash);
+        game.state.add('Tutorial', RKD.Games.RocketD.Tutorial);
+        game.state.add('Game', RKD.Games.RocketD.Game);
+        game.state.start('Boot');
+        window.scrollTo(0, 1);
+    })();
+
+</script>
+
+</html>
