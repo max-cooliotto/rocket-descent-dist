@@ -4,7 +4,7 @@ A lighthearted Phaser.io 2 prototype game originally built as a playful hidden e
 
 ## Background
 
-This game was originally created as a hidden easter egg for a website built during my time working at **RKD Web Studios**.
+This game was originally created in 2018 as a hidden easter egg for a website built during my time working at **RKD Web Studios**.
 
 The title **Rocket Descent** is a playful nod to the company acronym “RKD”.
 
