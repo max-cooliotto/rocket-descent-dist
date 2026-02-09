@@ -18,13 +18,29 @@
     <meta name="apple-mobile-web-app-title" content="Rocket Descent" />
     <link rel="manifest" href="/assets/image/site.webmanifest" />
 
-<link rel="manifest" href="manifest.json">
-    <link href="https://fonts.googleapis.com/css?family=Anton|Crete+Round|Muli:900" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Muli:wght@900&display=swap" rel="stylesheet">
+
+
     <style type="text/css">
-        body {
+        html, body {
             background: #eee;
             padding: 0px;
             margin: 0px;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #rocket-d {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
         }
         
         .fontPreload {
@@ -49,6 +65,7 @@
 </head>
 
 <body>
+    <div id="rocket-d"></div>
     <div class="fontPreload">
         <span class="font-anton">.</span>
         <span class="font-crete">.</span>
@@ -67,7 +84,7 @@
             lw = w;
             lh = h;
         }
-        const SAFE_ZONE_WIDTH = 1280; const SAFE_ZONE_HEIGHT = 720;
+        var SAFE_ZONE_WIDTH = 1280; var SAFE_ZONE_HEIGHT = 720;
         var aspectRatioDevice = lw / lh;
 
         var aspectRatioSafeZone = SAFE_ZONE_WIDTH / SAFE_ZONE_HEIGHT;
@@ -80,7 +97,9 @@
             extraHeight = SAFE_ZONE_WIDTH / aspectRatioDevice - SAFE_ZONE_HEIGHT;
         }
         //var game = new Phaser.Game(1280, 720, Phaser.CANVAS, 'rocket-d');
-        var game = new Phaser.Game(SAFE_ZONE_WIDTH + extraWidth, SAFE_ZONE_HEIGHT + extraHeight, Phaser.CANVAS, 'rocket-d');
+        var gameWidth = window.innerWidth || (SAFE_ZONE_WIDTH + extraWidth);
+        var gameHeight = window.innerHeight || (SAFE_ZONE_HEIGHT + extraHeight);
+        var game = new Phaser.Game(gameWidth, gameHeight, Phaser.CANVAS, 'rocket-d');
         game.state.add('Boot', RKD.Games.RocketD.Boot);
         game.state.add('Preloader', RKD.Games.RocketD.Preloader);
         game.state.add('PreSplash', RKD.Games.RocketD.PreSplash);
