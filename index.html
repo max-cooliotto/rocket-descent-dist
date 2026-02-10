@@ -25,7 +25,6 @@
 
     <style type="text/css">
         html, body {
-            background: #eee;
             padding: 0px;
             margin: 0px;
             width: 100%;
@@ -46,60 +45,21 @@
         .fontPreload {
             position: absolute;
             left: -100px;
-        }
-        
-        .font-anton {
-            font-family: 'Anton';
-        }
-        
-        .font-crete {
-            font-family: 'Crete Round';
-        }
-        
-        .font-muli {
             font-family: 'Muli';
         }
+        
     </style>
 
     <script src="game.js"></script>
 </head>
 
 <body>
+    <div class="fontPreload">&nbsp;</div>
     <div id="rocket-d"></div>
-    <div class="fontPreload">
-        <span class="font-anton">.</span>
-        <span class="font-crete">.</span>
-        <span class="font-muli">.</span>
-    </div>
 </body>
 <script type="text/javascript">
     (function () {
-        var w = window.innerWidth;//* pixelRatio,
-        var h = window.innerHeight;//* pixelRatio;
-        var lw, lh; //landscape width/height in pixels
-        if (h > w) {
-            lw = h;
-            lh = w;
-        } else {
-            lw = w;
-            lh = h;
-        }
-        var SAFE_ZONE_WIDTH = 1280; var SAFE_ZONE_HEIGHT = 720;
-        var aspectRatioDevice = lw / lh;
-
-        var aspectRatioSafeZone = SAFE_ZONE_WIDTH / SAFE_ZONE_HEIGHT;
-        var extraWidth = 0, extraHeight = 0;
-        if (aspectRatioSafeZone < aspectRatioDevice) {
-            // have to add game pixels vertically in order to fill the device screen
-            extraWidth = aspectRatioDevice * SAFE_ZONE_HEIGHT - SAFE_ZONE_WIDTH;
-        } else {
-            // have to add game pixels horizontally
-            extraHeight = SAFE_ZONE_WIDTH / aspectRatioDevice - SAFE_ZONE_HEIGHT;
-        }
-        //var game = new Phaser.Game(1280, 720, Phaser.CANVAS, 'rocket-d');
-        var gameWidth = window.innerWidth || (SAFE_ZONE_WIDTH + extraWidth);
-        var gameHeight = window.innerHeight || (SAFE_ZONE_HEIGHT + extraHeight);
-        var game = new Phaser.Game(gameWidth, gameHeight, Phaser.CANVAS, 'rocket-d');
+        var game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.CANVAS, 'rocket-d');
         game.state.add('Boot', RKD.Games.RocketD.Boot);
         game.state.add('Preloader', RKD.Games.RocketD.Preloader);
         game.state.add('PreSplash', RKD.Games.RocketD.PreSplash);
